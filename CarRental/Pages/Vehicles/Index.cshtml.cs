@@ -21,11 +21,19 @@ namespace CarRental.Pages.Vehicles
 
         public IList<Vehicle> Vehicle { get;set; } = default!;
 
+        [BindProperty(SupportsGet = true)]
+        public string? SearchString { get; set; }
+        
         public async Task OnGetAsync()
         {
             if (_context.Vehicle != null)
             {
                 Vehicle = await _context.Vehicle.ToListAsync();
+                
+                if (!string.IsNullOrEmpty(SearchString))
+                {
+                    Vehicle = Vehicle.Where(s => s.Registration.Contains(SearchString)).ToList();
+                }
             }
         }
     }

@@ -1,3 +1,5 @@
+using CarRental.Data;
+
 namespace CarRental.Models;
 
 public class Vehicle
@@ -7,4 +9,6 @@ public class Vehicle
     public VehicleType VehicleType { get; set; }
     public string Model { get; set; }
     public decimal PricePerDay { get; set; }
+    
+    public ICollection<Rental> Rentals { get; set; }
 }

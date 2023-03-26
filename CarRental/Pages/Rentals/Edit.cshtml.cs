@@ -36,6 +36,8 @@ namespace CarRental.Pages.Rentals
                 return NotFound();
             }
             Rental = rental;
+           ViewData["CustomerId"] = new SelectList(_context.Customer, "Id", "Id");
+           ViewData["VehicleId"] = new SelectList(_context.Vehicle, "Id", "Id");
             return Page();
         }
 

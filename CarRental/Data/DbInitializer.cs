@@ -52,6 +52,14 @@ public static class DbInitializer
                     Registration = "CT5522AA",
                     Model = "Mercedes A-Class",
                     PricePerDay = 50
+                },
+                
+                new Vehicle()
+                {
+                    VehicleType = VehicleType.Sports,
+                    Registration = "CAAAAAAA",
+                    Model = "BMW M5 CSL",
+                    PricePerDay = 100
                 }
             );
             
@@ -76,11 +84,20 @@ public static class DbInitializer
                 
                 new Customer()
                 {
+                    Name = "Jivka Jelqzkova",
+                    ContactInfo = new ContactInfo()
+                    {
+                        email = "jelqzkova@example.com",
+                        phone = "088888888"
+                    }
+                },
+                
+                new Customer()
+                {
                     Name = "Mihail Mihov",
                     ContactInfo = new ContactInfo()
                     {
-                        email = "mmihov@example.com",
-                        phone = "088888888"
+                        email = "mmihov@abc"
                     }
                 }
             );

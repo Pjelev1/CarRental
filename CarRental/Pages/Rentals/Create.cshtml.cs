@@ -10,7 +10,7 @@ using CarRental.Models;
 
 namespace CarRental.Pages.Rentals
 {
-    public class CreateModel : CustomerNamesPageModel
+    public class CreateModel : PageModel
     {
         private readonly CarRental.Data.RentalContext _context;
 
@@ -21,7 +21,8 @@ namespace CarRental.Pages.Rentals
 
         public IActionResult OnGet()
         {
-            PopulateCustomersSelectList(_context);
+            ViewData["Customer"] = new SelectList(_context.Customer, nameof(Customer.Id), nameof(Customer.Name));
+            ViewData["Vehicle"] = new SelectList(_context.Vehicle, nameof(Vehicle.Id), nameof(Vehicle.Model));
             return Page();
         }
 
@@ -32,7 +33,11 @@ namespace CarRental.Pages.Rentals
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Rental == null || Rental == null)
+            Rental.Customer = _context.Customer.Find(Rental.CustomerId);
+            Rental.Vehicle = _context.Vehicle.Find(Rental.VehicleId);
+            ModelState.MarkFieldValid(nameof(Models.Rental.Customer));
+            ModelState.MarkFieldValid(nameof(Models.Rental.Vehicle));
+          if (/*!ModelState.IsValid ||*/ _context.Rental == null || Rental == null)
             {
                 return Page();
             }

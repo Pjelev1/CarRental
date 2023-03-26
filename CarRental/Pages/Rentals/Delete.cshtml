@@ -24,6 +24,18 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Rental.Days)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rental.Customer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rental.Customer.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rental.Vehicle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rental.Vehicle.Id)
+        </dd>
     </dl>
     
     <form method="post">

@@ -25,7 +25,9 @@ namespace CarRental.Pages.Rentals
         {
             if (_context.Rental != null)
             {
-                Rental = await _context.Rental.ToListAsync();
+                Rental = await _context.Rental
+                .Include(r => r.Customer)
+                .Include(r => r.Vehicle).ToListAsync();
             }
         }
     }

@@ -31,7 +31,7 @@ namespace CarRental.Pages.Vehicles
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Vehicle == null || Vehicle == null)
+            if (/*!ModelState.IsValid ||*/ _context.Vehicle == null || Vehicle == null)
             {
                 return Page();
             }
