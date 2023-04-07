@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,10 @@ namespace CarRental.Pages.Vehicles
 
         [BindProperty(SupportsGet = true)]
         public string? SearchString { get; set; }
-        
+        [BindProperty(SupportsGet = true)]
+        public decimal? PriceFrom { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public decimal? PriceTo { get; set; }
         public async Task OnGetAsync()
         {
             if (_context.Vehicle != null)
@@ -32,8 +36,13 @@ namespace CarRental.Pages.Vehicles
                 
                 if (!string.IsNullOrEmpty(SearchString))
                 {
-                    Vehicle = Vehicle.Where(s => s.Registration.Contains(SearchString)).ToList();
+                    Vehicle = Vehicle.Where(s =>
+                        s.Registration.ToLower().Contains(SearchString.ToLower()) || s.Model.ToLower().Contains(SearchString.ToLower()))
+                        .ToList();
                 }
+Debug.WriteLine(SearchString + "-" + PriceFrom + "-" + PriceTo);
+                Vehicle = Vehicle.Where(v => v.PricePerDay >= PriceFrom.GetValueOrDefault(0)).ToList();
+                Vehicle = Vehicle.Where(v => v.PricePerDay <= PriceTo.GetValueOrDefault(decimal.MaxValue)).ToList();
             }
         }
     }

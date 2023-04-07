@@ -12,8 +12,13 @@
 </p>
 <form>
     <p>
-        Registration: <input type="text" asp-for="SearchString" />
-        <input type="submit" value="Filter" />
+        Search: <input type="text" asp-for="SearchString" />
+    </p>
+    <p>
+        Budget: <input type="number" value="20" asp-for="PriceFrom"/> - <input type="number" value="50" asp-for="PriceTo"/>
+    </p>
+    <p>
+        <input type="submit" value="Filter"/>
     </p>
 </form>
 <table class="table">
@@ -21,6 +26,9 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Vehicle[0].Registration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vehicle[0].EngineType)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Vehicle[0].VehicleType)
@@ -39,6 +47,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Registration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EngineType)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.VehicleType)
